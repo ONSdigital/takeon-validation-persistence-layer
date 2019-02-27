@@ -18,6 +18,7 @@ import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationFor
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -89,10 +90,10 @@ public class ValidationFormRepositoryMock {
         String validationCode = "VP";
 
         // When
-        ValidationFormEntity validRuleSearch = validationFormRepo.findByValidationidAndValidationCode(validationId, validationCode);
+        List<ValidationFormEntity> validRuleSearch = validationFormRepo.findByValidationidAndValidationCode(validationId, validationCode);
 
         // Then
-        assertThat(validRuleSearch.getValidationid())
+        assertThat(validRuleSearch.get(0).getValidationid())
                 .isEqualTo(1);
 
 

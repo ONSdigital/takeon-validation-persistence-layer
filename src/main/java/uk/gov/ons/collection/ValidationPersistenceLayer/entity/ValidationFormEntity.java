@@ -18,6 +18,11 @@ public class ValidationFormEntity {
     @JoinColumn(updatable = false, insertable = false, name = "validationcode", referencedColumnName = "validationrule")
     private ValidationRuleEntity validationRuleEntity;
 
+    @JsonManagedReference
+    @OneToOne
+    @JoinColumn(updatable = false, insertable = false, name = "validationid", referencedColumnName = "validationid")
+    private ValidationParameterEntity validationParameterEntity;
+
     @Id
     @Column(name = "validationid", nullable = false)
     private Integer validationid;
@@ -65,12 +70,12 @@ public class ValidationFormEntity {
         this.validationid = validationid;
     }
 
-    public Integer getValidationID() {
-        return validationid;
+    public ValidationParameterEntity getValidationParameterEntity() {
+        return validationParameterEntity;
     }
 
-    public void setValidationID(Integer validationID) {
-        this.validationid = validationID;
+    public void setValidationParameterEntity(ValidationParameterEntity validationParameterEntity) {
+        this.validationParameterEntity = validationParameterEntity;
     }
 
     public Integer getFormID() {
