@@ -85,20 +85,32 @@ public class ValidationFormRepositoryMock {
     }
 
     @Test
-    public void whenFindByValidationIdAndValidationCode_thenReturnConfig() {
+    public void whenFindByValidationId_thenReturnConfig() {
         Integer validationId = 1;
-        String validationCode = "VP";
 
         // When
-        List<ValidationFormEntity> validRuleSearch = validationFormRepo.findByValidationidAndValidationCode(validationId, validationCode);
+        List<ValidationFormEntity> validRuleSearch = validationFormRepo.findByValidationid(validationId);
 
         // Then
         assertThat(validRuleSearch.get(0).getValidationid())
                 .isEqualTo(1);
 
-
     }
 
+    @Test
+    public void whenFindByFormId_thenReturnFormConfig() {
+        Integer testFormID= 1;
+
+        // When
+        List<ValidationFormEntity> formSearch = validationFormRepo.findByFormID(testFormID);
+
+        // Then
+        assertThat(formSearch.get(0).getFormID())
+                .isEqualTo(1);
+
+
+
+    }
 
 
 }

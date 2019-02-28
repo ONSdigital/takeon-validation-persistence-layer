@@ -10,6 +10,7 @@ import java.util.List;
 public interface ValidationFormRepo extends JpaRepository<ValidationFormEntity, Integer>,
         JpaSpecificationExecutor<ValidationFormEntity> {
 
-    List<ValidationFormEntity> findByValidationidAndValidationCode(Integer validationId, String validationCode);
+    List<ValidationFormEntity> findByValidationid(Integer validationId);
+    List<ValidationFormEntity> findByFormID(Integer formID);
 
 }

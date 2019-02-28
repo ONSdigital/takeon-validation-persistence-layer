@@ -16,8 +16,8 @@ public class ValidationFormController {
     @Autowired
     private ValidationFormRepo validationFormRepo;
 
-    @ApiOperation(value = "Returns Validation Config for a form",
-            notes = "Returns all configuration data for all Validation rules - using validation ID and validation code")
+    @ApiOperation(value = "Returns Validation Config for a Validation ID",
+            notes = "Returns all configuration data for all Validation rules - using validation ID")
     @GetMapping(value = "/validations/configuration", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful retrieval of Validation Config", response = ValidationFormEntity.class),
@@ -25,9 +25,22 @@ public class ValidationFormController {
             @ApiResponse(code = 500, message = "Internal server error")}
     )
     public Iterable<ValidationFormEntity> getConfig(
-            @ApiParam(value = "Unique Validation ID", name = "validationId", required = true, example = "1") @RequestParam("validationId") Integer validationId,
-            @ApiParam(value = "Validation Code - VP, NV etc", name = "validationCode", required = true, example = "VP") @RequestParam("validationCode") String validationCode) {
-        return validationFormRepo.findByValidationidAndValidationCode(validationId, validationCode);
+            @ApiParam(value = "Unique Validation ID", name = "validationId", required = true, example = "1") @RequestParam("validationId") Integer validationId) {
+        return validationFormRepo.findByValidationid(validationId);
     }
+
+    @ApiOperation(value = "Returns Validation Config for a form",
+            notes = "Returns all configuration data for all Validation rules - using Form ID")
+    @GetMapping(value = "/validations/configuration/form", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful retrieval of Validation Config", response = ValidationFormEntity.class),
+            @ApiResponse(code = 404, message = "No Validation rule exists"),
+            @ApiResponse(code = 500, message = "Internal server error")}
+    )
+    public Iterable<ValidationFormEntity> getFormConfig(
+            @ApiParam(value = "Unique Form ID", name = "formID", required = true, example = "1") @RequestParam("formID") Integer formID) {
+        return validationFormRepo.findByFormID(formID);
+    }
+
 
 }
