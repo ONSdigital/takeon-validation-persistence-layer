@@ -18,8 +18,27 @@ public class ValidationOutputEntity {
     @JoinColumn(updatable = false, insertable = false, name = "validationid", referencedColumnName = "validationid")
     private ValidationFormEntity validationFormEntity;
 
+    public ValidationOutputEntity(String reference, String period, String survey, Integer validationID,
+                                  Integer instance, String primaryValue, String formula, String createdBy, Timestamp createdDate) {
+        this.reference = reference;
+        this.period = period;
+        this.survey = survey;
+        this.validationID = validationID;
+        this.instance = instance;
+        this.primaryValue = primaryValue;
+        this.formula = formula;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+    }
+
+    public ValidationOutputEntity(){
+
+    }
+
+
     @Id
     @Column(name = "validationoutputid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer validationOutputID;
 
     @Column(name = "reference", length = 11, nullable = false)

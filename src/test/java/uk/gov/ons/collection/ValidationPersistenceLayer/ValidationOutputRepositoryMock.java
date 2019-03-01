@@ -14,26 +14,26 @@ import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputE
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationParameterEntity;
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationRuleEntity;
 import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationFormRepo;
-
+import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationOutputRepo;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.LogManager;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("mocking")
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = {uk.gov.ons.collection.ValidationPersistenceLayer.ValidationPersistenceLayerApp.class})
-public class ValidationFormRepositoryMock {
+@ContextConfiguration(classes = {ValidationPersistenceLayerApp.class})
+public class ValidationOutputRepositoryMock {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private ValidationFormRepo validationFormRepo;
-
+    private ValidationOutputRepo validationOutputRepo;
 
     @Before
     public void setup(){
@@ -63,35 +63,23 @@ public class ValidationFormRepositoryMock {
         validationForm.setCreatedBy("Ryan");
         validationForm.setCreatedDate(new Timestamp(new Date().getTime()));
 
-        ValidationOutputEntity validationOutput = new ValidationOutputEntity();
-        //validationOutput.setValidationOutputID(1);
-        validationOutput.setReference("49900000000");
-        validationOutput.setPeriod("201709");
-        validationOutput.setSurvey("066");
-        validationOutput.setValidationID(1);
-        validationOutput.setInstance(0);
-        validationOutput.setPrimaryValue("146");
-        validationOutput.setFormula("146!=");
-        validationOutput.setCreatedBy("Ryan");
-        validationOutput.setCreatedDate(new Timestamp(new Date().getTime()));
-
         entityManager.persist(validationRule);
         entityManager.persist(validationParameter);
         entityManager.persist(validationForm);
-        entityManager.persist(validationOutput);
         entityManager.flush();
     }
 
     @Test
-    public void whenFindByValidationIdAndValidationCode_thenReturnConfig() {
-        Integer validationId = 1;
-        String validationCode = "VP";
+    public void whenValidationOutput_thenSave() {
 
         // When
-        List<ValidationFormEntity> validRuleSearch = validationFormRepo.findByValidationidAndValidationCode(validationId, validationCode);
+        ValidationOutputEntity testSaveOutput = new ValidationOutputEntity("49900000000", "201709",
+                "066", 1, 0, "146", "146!=",
+                "Ryan", new Timestamp(new Date().getTime()));
+        validationOutputRepo.save(testSaveOutput);
 
         // Then
-        assertThat(validRuleSearch.get(0).getValidationid())
+        assertThat(validationOutputRepo.getOne(1).getValidationOutputID())
                 .isEqualTo(1);
     }
 }
