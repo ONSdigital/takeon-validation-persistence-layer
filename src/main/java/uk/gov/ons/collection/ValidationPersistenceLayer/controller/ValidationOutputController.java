@@ -1,13 +1,19 @@
 package uk.gov.ons.collection.ValidationPersistenceLayer.controller;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputEntity;
+import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputEntityShort;
 import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationOutputRepo;
+import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationOutputRepoShort;
 
 import javax.persistence.EntityManagerFactory;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -18,6 +24,9 @@ public class ValidationOutputController {
 
     @Autowired
     private ValidationOutputRepo validationOutputRepo;
+
+    @Autowired
+    private ValidationOutputRepoShort validationOutputRepoShort;
 
     @ApiOperation(value = "Returns all Validation Outputs", notes = "Returns all columns for all triggered Validations")
     @GetMapping(value = "/validations", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,6 +52,17 @@ public class ValidationOutputController {
             @ApiParam(value = "Surveyed period - YYYYMM", name = "period", required = true, example = "201709") @RequestParam("period") String period,
             @ApiParam(value = "3-digit Unique survey code", name = "survey", required = true, example = "066") @RequestParam("survey") String survey) {
         return validationOutputRepo.findByReferenceAndPeriodAndSurvey(reference, period, survey);
+    }
+
+    @ApiOperation(value = "Saves all Validation Outputs", notes = "Saves all columns for all triggered Validations")
+    @PostMapping(value="/validations/output/save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Saved Validations", response = ValidationOutputEntity.class),
+            @ApiResponse(code = 404, message = "No Validation exist"),
+            @ApiResponse(code = 500, message = "Internal server error")}
+    )
+    public void saveValidations(@RequestBody ValidationOutputEntityShort validationOutputEntityShort) {
+        validationOutputRepoShort.save(validationOutputEntityShort);
     }
 
 }

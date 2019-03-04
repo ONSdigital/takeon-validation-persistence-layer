@@ -1,25 +1,19 @@
 package uk.gov.ons.collection.ValidationPersistenceLayer.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
 @Table(name = "validationoutput", schema = "dev01")
 @ApiModel(value = "ValidationOutput", description = "A ValidationOutput entity, maps ValidationOutput table to object")
-public class ValidationOutputEntity {
+public class ValidationOutputEntityShort {
 
-    @JsonManagedReference
-    @ManyToOne
-    @JoinColumn(updatable = false, insertable = false, name = "validationid", referencedColumnName = "validationid")
-    private ValidationFormEntity validationFormEntity;
 
-    public ValidationOutputEntity(String reference, String period, String survey, Integer validationID,
-                                  Integer instance, String primaryValue, String formula, String createdBy, Timestamp createdDate) {
+    public ValidationOutputEntityShort(String reference, String period, String survey, Integer validationID,
+                                       Integer instance, String primaryValue, String formula, String createdBy, Timestamp createdDate) {
         this.reference = reference;
         this.period = period;
         this.survey = survey;
@@ -31,7 +25,7 @@ public class ValidationOutputEntity {
         this.createdDate = createdDate;
     }
 
-    public ValidationOutputEntity(){
+    public ValidationOutputEntityShort(){
 
     }
 
@@ -74,13 +68,6 @@ public class ValidationOutputEntity {
     @Column(name = "lastupdateddate", length = 7)
     private Timestamp lastUpdatedDate;
 
-    public ValidationFormEntity getValidationFormEntity() {
-        return validationFormEntity;
-    }
-
-    public void setValidationFormEntity(ValidationFormEntity validationFormEntity) {
-        this.validationFormEntity = validationFormEntity;
-    }
 
     public Integer getValidationOutputID() {
         return validationOutputID;
