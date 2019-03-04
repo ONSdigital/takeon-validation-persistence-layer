@@ -73,10 +73,21 @@ public class ValidationOutputRepositoryMock {
     public void whenValidationOutput_thenSave() {
 
         // When
-        ValidationOutputEntity testSaveOutput = new ValidationOutputEntity("49900000000", "201709",
-                "066", 1, 0, "146", "146!=",
-                "Ryan", new Timestamp(new Date().getTime()));
-        validationOutputRepo.save(testSaveOutput);
+//        ValidationOutputEntity testSaveOutput = new ValidationOutputEntity("49900000000", "201709",
+//                "066", 1, 0, "146", "146!=",
+//                "Ryan", new Timestamp(new Date().getTime()));
+        ValidationOutputEntity validationOutput = new ValidationOutputEntity();
+        validationOutput.setValidationOutputID(1);
+        validationOutput.setReference("49900000000");
+        validationOutput.setPeriod("201709");
+        validationOutput.setSurvey("066");
+        validationOutput.setValidationID(1);
+        validationOutput.setInstance(0);
+        validationOutput.setPrimaryValue("146");
+        validationOutput.setFormula("146!=");
+        validationOutput.setCreatedBy("Ryan");
+        validationOutput.setCreatedDate(new Timestamp(new Date().getTime()));
+        validationOutputRepo.save(validationOutput);
 
         // Then
         assertThat(validationOutputRepo.getOne(1).getValidationOutputID())
