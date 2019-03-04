@@ -9,8 +9,7 @@ import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputE
 import java.util.List;
 
 @Repository
-public interface ValidationOutputRepo extends JpaRepository<ValidationOutputEntity, Integer>,
-        CrudRepository<ValidationOutputEntity, Integer>, JpaSpecificationExecutor<ValidationOutputEntity> {
+public interface ValidationOutputRepo extends JpaRepository<ValidationOutputEntity, Integer>, JpaSpecificationExecutor<ValidationOutputEntity> {
 
     List<ValidationOutputEntity> findByReferenceAndPeriodAndSurvey(String reference, String period, String survey);
 }
