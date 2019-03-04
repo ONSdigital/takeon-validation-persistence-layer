@@ -82,4 +82,23 @@ public class ValidationOutputRepositoryMock {
         assertThat(validationOutputRepo.getOne(1).getValidationOutputID())
                 .isEqualTo(1);
     }
+
+
+    @Test
+    public void whenDeleteByValidationOutputId_thenRowDeleted() {
+        Integer testValidationoutputId= 1;
+
+        // When
+        ValidationOutputEntity testSaveOutput = new ValidationOutputEntity("49900000000", "201709",
+                "066", 1, 0, "146", "146!=",
+                "Ryan", new Timestamp(new Date().getTime()));
+        testSaveOutput.setValidationOutputID(1);
+        validationOutputRepo.save(testSaveOutput);
+
+        validationOutputRepo.deleteByValidationOutputID(testValidationoutputId);
+
+        // Then
+        assertThat(validationOutputRepo.existsById(testValidationoutputId))
+                .isFalse();
+    }
 }

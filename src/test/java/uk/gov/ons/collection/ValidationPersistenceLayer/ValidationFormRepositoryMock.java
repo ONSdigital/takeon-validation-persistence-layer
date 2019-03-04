@@ -9,11 +9,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationFormEntity;
-import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputEntity;
-import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationParameterEntity;
-import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationRuleEntity;
+import uk.gov.ons.collection.ValidationPersistenceLayer.entity.*;
 import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationFormRepo;
+import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationOutputRepoShort;
 
 
 import java.sql.Timestamp;
@@ -33,7 +31,6 @@ public class ValidationFormRepositoryMock {
 
     @Autowired
     private ValidationFormRepo validationFormRepo;
-
 
     @Before
     public void setup(){
@@ -64,7 +61,6 @@ public class ValidationFormRepositoryMock {
         validationForm.setCreatedDate(new Timestamp(new Date().getTime()));
 
         ValidationOutputEntity validationOutput = new ValidationOutputEntity();
-        validationOutput.setValidationOutputID(1);
         validationOutput.setReference("49900000000");
         validationOutput.setPeriod("201709");
         validationOutput.setSurvey("066");
@@ -97,6 +93,7 @@ public class ValidationFormRepositoryMock {
 
     }
 
+
     @Test
     public void whenFindByFormId_thenReturnFormConfig() {
         Integer testFormID= 1;
@@ -107,8 +104,6 @@ public class ValidationFormRepositoryMock {
         // Then
         assertThat(formSearch.get(0).getFormID())
                 .isEqualTo(1);
-
-
 
     }
 

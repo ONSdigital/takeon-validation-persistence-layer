@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputEntity;
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputEntityShort;
@@ -57,12 +58,24 @@ public class ValidationOutputController {
     @ApiOperation(value = "Saves all Validation Outputs", notes = "Saves all columns for all triggered Validations")
     @PostMapping(value="/validations/output/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully Saved Validations", response = ValidationOutputEntity.class),
+            @ApiResponse(code = 200, message = "Successfully Saved Validations", response = ValidationOutputEntityShort.class),
             @ApiResponse(code = 404, message = "No Validation exist"),
             @ApiResponse(code = 500, message = "Internal server error")}
     )
     public void saveValidations(@RequestBody ValidationOutputEntityShort validationOutputEntityShort) {
         validationOutputRepoShort.save(validationOutputEntityShort);
+    }
+
+    @ApiOperation(value = "Deletes all Validation Outputs", notes = "Deletes all Validations")
+    @DeleteMapping(value="/validations/output/delete/{Id}")
+    @Transactional
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Deleted Validations", response = ValidationOutputEntityShort.class),
+            @ApiResponse(code = 404, message = "No Validation exist"),
+            @ApiResponse(code = 500, message = "Internal server error")}
+    )
+    public void deleteValidations(@PathVariable Integer Id) {
+        validationOutputRepo.deleteByValidationOutputID(Id);
     }
 
 }
