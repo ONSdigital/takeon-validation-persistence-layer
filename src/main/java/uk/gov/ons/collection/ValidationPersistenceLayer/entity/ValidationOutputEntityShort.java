@@ -7,8 +7,11 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Data
-@NoArgsConstructor(force= true)
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
+@ToString
 @Table(name = "validationoutput", schema = "dev01")
 @ApiModel(value = "ValidationOutput", description = "A ValidationOutput entity, maps ValidationOutput table to object")
 public class ValidationOutputEntityShort {
@@ -19,31 +22,31 @@ public class ValidationOutputEntityShort {
     private Integer validationOutputID;
 
     @Column(name = "reference", length = 11, nullable = false)
-    private final @NonNull String reference;
+    private @NonNull String reference;
 
     @Column(name = "period", length = 6, nullable = false)
-    private final @NonNull String period;
+    private @NonNull String period;
 
     @Column(name = "survey", length = 6, nullable = false)
-    private final @NonNull String survey;
+    private @NonNull String survey;
 
     @Column(name = "validationid", nullable = false)
-    private final @NonNull Integer validationID;
+    private @NonNull Integer validationID;
 
     @Column(name = "instance", nullable = false)
-    private final @NonNull Integer instance;
+    private @NonNull Integer instance;
 
     @Column(name = "primaryvalue", length = 128, nullable = false)
-    private final @NonNull String primaryValue;
+    private @NonNull String primaryValue;
 
     @Column(name = "formula", length = 128, nullable = false)
-    private final @NonNull String formula;
+    private @NonNull String formula;
 
     @Column(name = "createdby", length = 16, nullable = false)
-    private final @NonNull String createdBy;
+    private @NonNull String createdBy;
 
     @Column(name = "createddate", length = 7, nullable = false)
-    private final @NonNull Timestamp createdDate;
+    private @NonNull Timestamp createdDate;
 
     @Column(name = "lastupdatedby", length = 16)
     private String lastUpdatedBy;
