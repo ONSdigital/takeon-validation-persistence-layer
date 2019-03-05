@@ -3,20 +3,16 @@ package uk.gov.ons.collection.ValidationPersistenceLayer.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
+@Data
+@NoArgsConstructor(force= true)
 @Table(name = "validationform", schema = "dev01")
 @ApiModel(value = "ValidationForm", description = "A ValidationForm entity, maps ValidationForm table to object")
 public class ValidationFormEntity {
@@ -33,28 +29,28 @@ public class ValidationFormEntity {
 
     @Id
     @Column(name = "validationid", nullable = false)
-    private Integer validationid;
+    private final @NonNull Integer validationid;
 
     @Column(name = "formid", nullable = false)
-    private Integer formID;
+    private final @NonNull Integer formID;
 
     @Column(name = "validationcode", length = 16, nullable = false)
-    private String validationCode;
+    private final @NonNull String validationCode;
 
     @Column(name = "questioncode", length = 4, nullable = false)
-    private String questionCode;
+    private final @NonNull String questionCode;
 
     @Column(name = "precalculationformula", length = 256, nullable = false)
-    private String preCalculationFormula;
+    private final @NonNull String preCalculationFormula;
 
     @Column(name = "severity", length = 16, nullable = false)
-    private String severity;
+    private final @NonNull String severity;
 
     @Column(name = "createdby", length = 16, nullable = false)
-    private String createdBy;
+    private final @NonNull String createdBy;
 
     @Column(name = "createddate", length = 7, nullable = false)
-    private Timestamp createdDate;
+    private final @NonNull Timestamp createdDate;
 
     @Column(name = "lastupdatedby", length = 16)
     private String lastUpdatedBy;

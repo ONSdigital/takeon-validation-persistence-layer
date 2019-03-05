@@ -38,42 +38,22 @@ public class ValidationFormRepositoryMock {
     @Before
     public void setup(){
 
-        ValidationRuleEntity validationRule = new ValidationRuleEntity();
-        validationRule.setValidationRule("VP");
-        validationRule.setName("Value Present");
-        validationRule.setDescription("Trigger if value is present");
-        validationRule.setCreatedBy("Ryan");
-        validationRule.setCreatedDate(new Timestamp(new Date().getTime()));
+        ValidationRuleEntity validationRule = new ValidationRuleEntity("VP", "Value Present",
+                "Trigger if value is present",
+                "Ryan", new Timestamp(new Date().getTime()));
 
-        ValidationParameterEntity validationParameter = new ValidationParameterEntity();
-        validationParameter.setValidationID(1);
-        validationParameter.setAttributeValue("90123");
-        validationParameter.setParameter("Value");
-        validationParameter.setValue("146");
-        validationParameter.setCreatedBy("Ryan");
-        validationParameter.setCreatedDate(new Timestamp(new Date().getTime()));
+        ValidationParameterEntity validationParameter = new ValidationParameterEntity(1, "90123",
+                "Value", "146", "Ryan", new Timestamp(new Date().getTime()));
 
-        ValidationFormEntity validationForm = new ValidationFormEntity();
-        validationForm.setValidationid(1);
-        validationForm.setFormID(1);
-        validationForm.setValidationCode("VP");
-        validationForm.setQuestionCode("146");
-        validationForm.setPreCalculationFormula("Q146!=");
-        validationForm.setSeverity("E");
-        validationForm.setCreatedBy("Ryan");
-        validationForm.setCreatedDate(new Timestamp(new Date().getTime()));
 
-        ValidationOutputEntity validationOutput = new ValidationOutputEntity();
-        validationOutput.setValidationOutputID(1);
-        validationOutput.setReference("49900000000");
-        validationOutput.setPeriod("201709");
-        validationOutput.setSurvey("066");
-        validationOutput.setValidationID(1);
-        validationOutput.setInstance(0);
-        validationOutput.setPrimaryValue("146");
-        validationOutput.setFormula("146!=");
-        validationOutput.setCreatedBy("Ryan");
-        validationOutput.setCreatedDate(new Timestamp(new Date().getTime()));
+        ValidationFormEntity validationForm = new ValidationFormEntity(1, 1, "VP",
+                "146", "Q146!=", "E", "Ryan",
+                new Timestamp(new Date().getTime()));
+
+
+        ValidationOutputEntity validationOutput = new ValidationOutputEntity("49900000000", "201709",
+                "066", 1, 0, "146", "146!=",
+                "Ryan", new Timestamp(new Date().getTime()));
 
         entityManager.persist(validationRule);
         entityManager.persist(validationParameter);

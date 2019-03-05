@@ -1,38 +1,33 @@
 package uk.gov.ons.collection.ValidationPersistenceLayer.entity;
 
 import io.swagger.annotations.ApiModel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
+@Data
+@NoArgsConstructor(force= true)
 @Table(name = "validationrule", schema = "dev01")
 @ApiModel(value = "ValidationRule", description = "A ValidationRule entity, maps ValidationRule table to object")
 public class ValidationRuleEntity {
 
     @Id
     @Column(name = "validationrule", length = 16, nullable = false)
-    private String validationRule;
+    private final @NonNull String validationRule;
 
     @Column(name = "name", length = 32, nullable = false)
-    private String name;
+    private final @NonNull String name;
 
     @Column(name = "description", length = 128, nullable = false)
-    private String description;
+    private final @NonNull String description;
 
     @Column(name = "createdby", length = 16, nullable = false)
-    private String createdBy;
+    private final @NonNull String createdBy;
 
     @Column(name = "createddate", length = 7, nullable = false)
-    private Timestamp createdDate;
+    private final @NonNull Timestamp createdDate;
 
     @Column(name = "lastupdatedby", length = 16)
     private String lastUpdatedBy;
