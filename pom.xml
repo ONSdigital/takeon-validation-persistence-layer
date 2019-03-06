@@ -34,6 +34,7 @@
         <info.cukes.version>1.2.5</info.cukes.version>
         <io.springfox.version>2.9.2</io.springfox.version>
         <org.hibernate.javax.persistance.version>1.0.0</org.hibernate.javax.persistance.version>
+        <org.projectlombok.version>1.18.6</org.projectlombok.version>
     </properties>
 
     <dependencies>
@@ -135,7 +136,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.6</version>
+            <version>${org.projectlombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
