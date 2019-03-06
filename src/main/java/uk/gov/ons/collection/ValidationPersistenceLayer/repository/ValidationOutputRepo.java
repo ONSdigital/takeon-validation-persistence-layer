@@ -7,9 +7,13 @@ import org.springframework.stereotype.Repository;
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputEntity;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface ValidationOutputRepo extends JpaRepository<ValidationOutputEntity, Integer>, JpaSpecificationExecutor<ValidationOutputEntity> {
 
     List<ValidationOutputEntity> findByReferenceAndPeriodAndSurvey(String reference, String period, String survey);
+
+    void deleteByValidationOutputID(Integer Id);
+    void deleteByReferenceAndPeriodAndSurvey(String reference, String period, String survey);
 }

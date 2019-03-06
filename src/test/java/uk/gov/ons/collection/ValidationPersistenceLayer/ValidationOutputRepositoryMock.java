@@ -18,7 +18,9 @@ import uk.gov.ons.collection.ValidationPersistenceLayer.repository.ValidationOut
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,4 +70,46 @@ public class ValidationOutputRepositoryMock {
         assertThat(validationOutputRepo.getOne(1).getValidationOutputID())
                 .isEqualTo(1);
     }
+
+
+    @Test
+    public void whenDeleteByValidationOutputId_thenRowDeleted() {
+        Integer testValidationoutputId= 1;
+
+        // When
+        ValidationOutputEntity testSaveOutput = new ValidationOutputEntity("49900000000", "201709",
+                "066", 1, 0, "146", "146!=",
+                "Ryan", new Timestamp(new Date().getTime()));
+        testSaveOutput.setValidationOutputID(1);
+        validationOutputRepo.save(testSaveOutput);
+
+        validationOutputRepo.deleteByValidationOutputID(testValidationoutputId);
+
+        // Then
+        assertThat(validationOutputRepo.existsById(testValidationoutputId))
+                .isFalse();
+    }
+
+    @Test
+    public void whenDeleteByValidationReferencePeriodSurvey_thenRowDeleted() {
+        Map<String, String> matrixVars=new HashMap<String, String>();
+        matrixVars.put("reference", "49900000000");
+        matrixVars.put("period","201709");
+        matrixVars.put("survey","066");
+
+        // When
+        ValidationOutputEntity testSaveOutput = new ValidationOutputEntity("49900000000", "201709",
+                "066", 1, 0, "146", "146!=",
+                "Ryan", new Timestamp(new Date().getTime()));
+        testSaveOutput.setValidationOutputID(1);
+        validationOutputRepo.save(testSaveOutput);
+
+        validationOutputRepo.deleteByReferenceAndPeriodAndSurvey(matrixVars.get("reference"), matrixVars.get("period"),
+                matrixVars.get("survey"));
+
+        // Then
+        assertThat(validationOutputRepo.findByReferenceAndPeriodAndSurvey("49900000000", "201709", "066"))
+                .isEmpty();
+    }
+
 }

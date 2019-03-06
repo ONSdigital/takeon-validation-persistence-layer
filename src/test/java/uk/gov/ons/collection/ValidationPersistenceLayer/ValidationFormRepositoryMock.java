@@ -34,7 +34,6 @@ public class ValidationFormRepositoryMock {
     @Autowired
     private ValidationFormRepo validationFormRepo;
 
-
     @Before
     public void setup(){
 
@@ -87,8 +86,6 @@ public class ValidationFormRepositoryMock {
         // Then
         assertThat(formSearch.get(0).getFormID())
                 .isEqualTo(1);
-
-
 
     }
 
