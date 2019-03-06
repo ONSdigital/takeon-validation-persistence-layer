@@ -5,6 +5,12 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationFormEntity;
 
+import java.util.List;
+
 public interface ValidationFormRepo extends JpaRepository<ValidationFormEntity, Integer>,
         JpaSpecificationExecutor<ValidationFormEntity> {
+
+    List<ValidationFormEntity> findByValidationid(Integer validationId);
+    List<ValidationFormEntity> findByFormID(Integer formID);
+
 }
