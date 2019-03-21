@@ -1,5 +1,6 @@
 package uk.gov.ons.collection.ValidationPersistenceLayer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
 
@@ -9,10 +10,12 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
 @ToString
 @Table(name = "validationoutput", schema = "dev01")
+@AllArgsConstructor
 @ApiModel(value = "ValidationOutput", description = "A ValidationOutput entity, maps ValidationOutput table to object")
 public class ValidationOutputEntityShort {
 

@@ -27,7 +27,7 @@
         <jayway.com.version>2.4.0</jayway.com.version>
         <swagger.version>2.9.2</swagger.version>
         <org.hibernate.version>5.11.0.Final</org.hibernate.version>
-        <org.springframework.cloud.version>2.0.2.RELEASE</org.springframework.cloud.version>
+        <org.springframework.cloud.version>2.1.0.RELEASE</org.springframework.cloud.version>
         <org.junit.jupiter.version>5.3.1</org.junit.jupiter.version>
         <org.junit.vintage.version>5.3.1</org.junit.vintage.version>
         <org.springframework.boot.version>2.0.5</org.springframework.boot.version>
@@ -122,22 +122,27 @@
             <version>${org.springframework.cloud.version}</version>
         </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
 
-            <dependency>
-                <groupId>org.hsqldb</groupId>
-                <artifactId>hsqldb</artifactId>
-                <scope>test</scope>
-            </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${org.projectlombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
         </dependency>
 
     </dependencies>

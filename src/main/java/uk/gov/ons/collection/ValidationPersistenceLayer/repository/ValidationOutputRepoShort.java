@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ValidationOutputRepoShort extends JpaRepository<ValidationOutputEntityShort, Integer>, JpaSpecificationExecutor<ValidationOutputEntityShort> {
 
-    List<ValidationOutputEntityShort> findByReferenceAndPeriodAndSurvey(String reference, String period, String survey);
+    Iterable<ValidationOutputEntityShort> findByReferenceAndPeriodAndSurvey(String reference, String period, String survey);
 
 }
