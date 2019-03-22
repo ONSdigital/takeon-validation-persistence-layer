@@ -114,14 +114,6 @@ public class ValidationOutputController {
             deleteValidationsByMatrix(contributorKey);
             for (ReturnedValidationOutputs element : returnedValidation) {
                 if (element.getTriggered().equals("true")) {
-//                    outputsToUpdate.builder().createdBy("fisdba").createdDate(new Timestamp(System.currentTimeMillis()))
-//                            .instance(Integer.parseInt(element.getMetaData().get("instance")))
-//                            .reference(element.getMetaData().get("reference"))
-//                            .period(element.getMetaData().get("period"))
-//                            .survey(element.getMetaData().get("survey"))
-//                            .formula(element.getValueFormula())
-//                            .validationID(Integer.parseInt(element.getMetaData().get("validationId")))
-//                            .primaryValue(element.getMetaData().get("primaryValue")).build();
                     outputsToUpdate.setCreatedBy("fisdba");
                     outputsToUpdate.setCreatedDate(new Timestamp(System.currentTimeMillis()));
                     outputsToUpdate.setInstance(Integer.parseInt(element.getMetaData().get("instance")));
@@ -131,14 +123,11 @@ public class ValidationOutputController {
                     outputsToUpdate.setFormula(element.getValueFormula());
                     outputsToUpdate.setValidationID(Integer.parseInt(element.getMetaData().get("validationId")));
                     outputsToUpdate.setPrimaryValue(element.getMetaData().get("primaryValue"));
-                    System.out.println(outputsToUpdate.toString());
                     entityManager.merge(outputsToUpdate);
                 }
             }
-
         }
         catch (Exception e){
-            System.out.println(e);
             entityManager.getTransaction().rollback();
         }
         finally {
