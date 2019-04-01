@@ -131,7 +131,9 @@ public class ValidationOutputController {
             entityManager.getTransaction().rollback();
         }
         finally {
-            entityManager.getTransaction().commit();
+            if(entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().commit();
+            }
             entityManager.close();
         }
     }
