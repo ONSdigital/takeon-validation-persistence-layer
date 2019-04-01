@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationFormEntity;
+import uk.gov.ons.collection.ValidationPersistenceLayer.entity.ValidationOutputEntity;
 
 import java.util.List;
 

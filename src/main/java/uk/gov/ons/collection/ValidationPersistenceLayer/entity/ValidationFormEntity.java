@@ -60,5 +60,4 @@ public class ValidationFormEntity {
 
     @Column(name = "lastupdateddate", length = 7)
     private Timestamp lastUpdatedDate;
-
 }
